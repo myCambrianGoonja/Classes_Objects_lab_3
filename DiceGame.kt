@@ -21,7 +21,7 @@ fun main() {
            time because there would otherwise be
            too much confusion
     */
-    var dieTesting = Die(20)
+    var dieTesting = Die(6)
     testingAllTheConstructors()
     diceValueBeforeAndAfter()
     heighestValue(dieTesting)
@@ -43,7 +43,7 @@ fun testingAllTheConstructors() {
     val die4 = Die(6) // Same as default || die results
     val die5 = Die(20) // numberOfSide = TWENTY && color = ORANGE && sideUp = any number between 1 to 20
 
-    val die6 = Die(20, "#FFFFFF") // numberOfSides = TWENTY && color = WHITE && sideUp = any number between 1 to 20
+    val die6 = Die(20, "#FFFF00") // numberOfSides = TWENTY && color = YELLOW && sideUp = any number between 1 to 20
     val die7 = Die(3, "RED") // numberOfSides = THREE && color = RED && sideUp = any number between 1 to 3
     val die8 = Die(4, "GREEN") // Error invlid entry AND all values to be null
 
@@ -55,7 +55,7 @@ fun testingAllTheConstructors() {
     printResults(die4, 6, NumOfParamers.ONEP.name) // ONE PARAMETER
     printResults(die5, 20, NumOfParamers.ONEP.name) // ONE PARAMETER
 
-    printResults(die6, 20, "#FFA500") //
+    printResults(die6, 20, "#FFFF00") 
     printResults(die7, 3, "RED")
     printResults(die8, 4, "GREEN")
 }
@@ -78,7 +78,7 @@ fun printResults(die: Die, valuePassed: Int?, secondParameter: String?) {
     var sPassed = secondParameter
     println()
     if (sPassed == NumOfParamers.ONEP.name || sPassed == NumOfParamers.ZEROP.name) {
-        var currentParameter = NumOfParamers.values().find { it.name == colorPassed }
+        var currentParameter = NumOfParamers.values().find { it.name == secondParameter }
         println("Number of parameters for this are: ${currentParameter?.meaning}")
         sPassed = null
         println()

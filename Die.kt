@@ -103,7 +103,7 @@ class Die {
             roll()
         } else {
             // Guiding the user to enter the right values for the number of sides
-            println("We have dices with only dices with 3,4,6,20 sides only")
+            println("The value you entered $numberOfSides. We have dices with only dices with 3,4,6,20 sides only")
             return
         }
     }
@@ -126,8 +126,8 @@ class Die {
             color = validColor
             roll()
         } else {
-            println("Please enter valid values, values allowed for Colors are")
-            // Guiding the user to use the right values for colors
+            // Guiding the user to use the right values
+            println("The value you entered Color : $selectedColor and NumberOfSides $numOfSides:  Please enter valid values, values allowed for Numbers are:  3,4,6,20 and Colors are")
             val allColors = Color.values()
             for (color in allColors) {
                 println("Color: ${color.name}, Other: ${color.other}, Hex Code: ${color.hexCode}")
