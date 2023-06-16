@@ -145,6 +145,4 @@ class Die {
     fun roll() {
         sideUp = Random.nextInt(1, numberOfSides?.value?.plus(1)?: 1)
     }
-
-
 }

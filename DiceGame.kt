@@ -3,6 +3,7 @@ package game
 /*
 Test case uses parameters with different 
 parameters thus using this enum helps optimize the code 
+@param meaning = helps with the full sentence instead of the name
 */
 enum class NumOfParamers(val meaning:String){
     ZEROP("Zero parameters"),
