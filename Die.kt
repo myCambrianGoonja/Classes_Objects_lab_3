@@ -26,10 +26,10 @@ enum class Sides(val value: Int) {
     constructors with seperate parameters 
 
  */
-class Die() {
+class Die {
      var color: Color? = null
     var numberOfSides: Sides? = null
-    var sideUp: Int = 0
+    var sideUp: Int? = null
 
     constructor() {
         color = Color.values().find { it.otherName == "d6" }
@@ -38,13 +38,18 @@ class Die() {
     }
 
     constructor(numberOfSides: Int) {
-        this.numberOfSides = Sides.values().find { it.value == numberOfSides }
-            ?: throw IllegalArgumentException("Invalid number of sides: $numberOfSides")
-        roll()
+        val validNumberOfSides = Sides.values().find { it.value == numberOfSides }
+        if(validNumberOfSides != null) {
+            this.numberOfSides = validNumberOfSides
+            color = Color.values().find { it.otherName == "d${validNumberOfSides}" }
+            roll()
+        } else {
+            println("We have dices with only dices with 3,4,6,20 sides only")
+        }
     }
 
     fun roll() {
         println("Rolling the dice")
-        sideUp = Random.nextInt(1, numberOfSides.value + 1)
+        sideUp = Random.nextInt(1, numberOfSides?.value?.plus(1)?: 1)
     }
 }
