@@ -1,6 +1,23 @@
 package game
 import kotlin.random.Random
 
+/*
+    Enum for the list of colors to help
+    with different values of color 
+   
+    @param other = we have to able to 
+    assign the color value using the numberOfSides 
+    we can do that using Color.other
+   
+    @pram hexCode = an extra feature where 
+    the user can set the value of a color using 
+    hexCode of a color
+
+    thus user can set the value of a color by 
+    1. color.name 
+    2. color.other  
+    3. color.hexCode
+*/
 enum class Color(val other: String, val hexCode: String) {
     RED("d3", "#FF0000"),
     WHITE("d4", "#FFFFFF"),
@@ -8,6 +25,19 @@ enum class Color(val other: String, val hexCode: String) {
     ORANGE("d20", "#FFA500")
 }
 
+/*
+    For the number of sides in a dice 
+    user can set the value using the 
+    numeric vale or spell the same value
+
+    @param value = takes a numeric value
+    and sets the alphabetic enum accordingly
+
+    hence different properties of Sides are: 
+    1. Sides.name: String
+    2. Sides.value: Int
+
+ */
 enum class Sides(val value: Int) {
     THREE(3),
     FOUR(4),
@@ -34,7 +64,7 @@ class Die {
     constructor() {
         color = Color.values().find { it.other == "d6" }
         numberOfSides = Sides.SIX
-        sideUp = roll()
+        roll()
     }
 
     constructor(numberOfSides: Int) {
@@ -44,7 +74,7 @@ class Die {
         if(validNumberOfSides != null) {
             this.numberOfSides = validNumberOfSides
             color = Color.values().find { it.other == colorName }
-            sideUp = roll()
+            roll()
         } else {
             println("We have dices with only dices with 3,4,6,20 sides only")
             return
@@ -57,7 +87,7 @@ class Die {
         if(validColor != null && validNumberOfSides != null) {
             numberOfSides = validNumberOfSides
             color = validColor
-            sideUp = roll()
+            roll()
         } else {
             println("Please enter valid values, values allowed for Colors are")
             val allColors = Color.values()
@@ -77,9 +107,9 @@ class Die {
         return numberOfSides?.value
     }
 
-    fun roll(): Int {
-        println("Rolling the dice")
-        return Random.nextInt(1, numberOfSides?.value?.plus(1)?: 1)
+    fun roll() {
+        sideUp = Random.nextInt(1, numberOfSides?.value?.plus(1)?: 1)
     }
+
 
 }

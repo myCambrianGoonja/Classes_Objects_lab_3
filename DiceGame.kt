@@ -1,19 +1,37 @@
 package game
 
-
+/*
+Test case uses parameters with different 
+parameters thus using this enum helps optimize the code 
+*/
 enum class NumOfParamers(val meaning:String){
     ZEROP("Zero parameters"),
     ONEP("One Parameter")
 }
 
 fun main() {
+    /*
+        1.  You can customize the values in the dieTesting 
+            by trying different options, such as setting 
+            zero parameters or Die(3), Die(5) other variations 
+            for the heighestValue() function.
+        
+        2.  It is better to test one test case at a 
+            time because there would otherwise be 
+            too much confusion
+     */
+    var dieTesting = Die(20)
     testingAllTheConstructors()
-     /*PLEASE UNCOMMENT WHEN TESTING IS NEEDED 
-    BECAUSE CHANCES OF THIS GOING INTO INFITE LOOP ARE HIGH */ 
-    //fiveDieUniqueValue()
+    diceValueBeforeAndAfter()
+    heighestValue(dieTesting) 
+    fiveDieUniqueValue()
 }
 
 //TESTING ALL THE PARAMETERS 
+/*
+    Test case 1 
+    Create different sized dice using each constructor
+ */
 fun testingAllTheConstructors() {
 
     val die = Die() //numberOfSide = SIX && color = YELLOW && sideUp = any number between 1 to 6
@@ -42,7 +60,7 @@ fun testingAllTheConstructors() {
 
 
 }
-
+//This is used to print all the results from testingAllTheConstructors()
 fun printResults(die: Die, valuePassed: Int?, colorPassed: String?) {
     val color = die.getColor()
     val maxSides = die.getNumberOfSides()
@@ -61,11 +79,36 @@ fun printResults(die: Die, valuePassed: Int?, colorPassed: String?) {
     println()
 }
 
+/*
+    Test case 2 
+    Roll the dice and display their results (before and after)
+ */
+fun diceValueBeforeAndAfter() {
+    var die: Die = Die()
+    println("Default current value of the dice is: ${die.sideUp}")
+    die.roll()
+    println("Results after you roll is: ${die.sideUp}")
+}
 
-/*PLEASE UNCOMMENT THIS WHEN YOU WANT 
-TO TEST BECAUSE IT ENDS UP 
-GOING IN INFINETE LOOP QUITE OFTEN AS THE 
-CHANCES OF 5 Dices having Unique value seems very rare*/
+/*
+    Test case 3
+    Choose one Die object and set it to show it's highest value
+    we can pass different dies in the dieTesting to check how 
+    it works with different values
+ */
+fun heighestValue(dieTesting: Die) {
+    var die: Die = dieTesting
+    //The highest values = the max number sides thus the code below
+    var heighestValue = die.getNumberOfSides()
+    println("The heighest value this dice can have is ${heighestValue}")
+}
+
+/*
+    Test case 4 
+    Create 5 six-sided dice. 
+    Roll each Die in a loop until you get 5 of a kind. 
+    Count and display the number of rolls.
+ */
 fun fiveDieUniqueValue() {
     //Declared a list of 5 dices
     val dice = List(5) { Die() }
@@ -78,9 +121,15 @@ fun fiveDieUniqueValue() {
     have unquie value 
     */
     while (dice.map { it.sideUp }.distinct().size != dice.size) {
-        dice.forEach { it.roll() }
-        rolled++
+        dice.forEach { 
+        it.roll() 
+        rolled = rolled + 1 }
+        
     }
 
     println("Dice was rolled $rolled times before all the 5 dice could have a different value")
+    println("Dice values are:")
+    dice.forEach {
+        print("${it.sideUp} ")
+    }
 }
