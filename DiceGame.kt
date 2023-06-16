@@ -55,23 +55,40 @@ fun testingAllTheConstructors() {
     printResults(die4, 6, NumOfParamers.ONEP.name) // ONE PARAMETER
     printResults(die5, 20, NumOfParamers.ONEP.name) // ONE PARAMETER
 
-    printResults(die6, 20, "#FFA500")
+    printResults(die6, 20, "#FFA500") //
     printResults(die7, 3, "RED")
     printResults(die8, 4, "GREEN")
 }
-// This is used to print all the results from testingAllTheConstructors()
-fun printResults(die: Die, valuePassed: Int?, colorPassed: String?) {
+/*
+ This is used to print all the results from testingAllTheConstructors()
+ @param die = holds the dice created in the testingAllTheConstructors()
+ @param secondParameter = If there are two parameters then there is a 
+                      color passed in this or else the number of 
+                      parameters eg 'ZEROP' or 'ONEP'
+ */ 
+fun printResults(die: Die, valuePassed: Int?, secondParameter: String?) {
     val color = die.getColor()
     val maxSides = die.getNumberOfSides()
+    /*
+        We need to change the value to null if it has 
+        Zero or One parameter constructor but sice 
+        kotlin by default sets its parameter to a constant 
+        the value cannot be chaged hence
+    */
+    var sPassed = secondParameter
     println()
-    if (colorPassed == NumOfParamers.ONEP.name || colorPassed == NumOfParamers.ZEROP.name) {
+    if (sPassed == NumOfParamers.ONEP.name || sPassed == NumOfParamers.ZEROP.name) {
         var currentParameter = NumOfParamers.values().find { it.name == colorPassed }
         println("Number of parameters for this are: ${currentParameter?.meaning}")
+        sPassed = null
         println()
+    } else {
+        println("Number of parameters for this are: Two parameters")
     }
-    println("FOR: ${valuePassed} && ${colorPassed} Default color of the dice: ${color}")
-    println("FOR: ${valuePassed} && ${colorPassed} Default numberOfSide of the dice: ${maxSides}")
-    println("FOR: ${valuePassed} && ${colorPassed} the side currently showing is: ${die.sideUp}")
+
+        println("FOR: ${valuePassed} && ${sPassed} Default color of the dice: ${color}")
+        println("FOR: ${valuePassed} && ${sPassed} Default numberOfSide of the dice: ${maxSides}")
+        println("FOR: ${valuePassed} && ${sPassed} the side currently showing is: ${die.sideUp}")
 
     println()
     println()
@@ -107,6 +124,17 @@ fun heighestValue(dieTesting: Die) {
    Create 5 six-sided dice.
    Roll each Die in a loop until you get 5 of a kind.
    Count and display the number of rolls.
+
+   Note: There are two possible solutions to rolling 5 dices till 
+   they have unique value. 
+    1. Is the method used in this code where we roll all 
+       the 5 die objects till the values are not seperate
+    2. We roll only those objects that have the same value 
+       ex if die 2 and die 3 have value 2,2 then we will roll 
+       only one of them. 
+    However the iteration to find the repeated value would require 
+    two loops which will increase the time complexity and so this 
+    is a better solution
 */
 fun fiveDieUniqueValue() {
     // Declared a list of 5 dices
