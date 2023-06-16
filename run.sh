@@ -1,0 +1,1 @@
+kotlinFiles=$(find . -name "*.kt") && kotlinc $kotlinFiles -include-runtime -d Main.jar && java -jar Main.jar
