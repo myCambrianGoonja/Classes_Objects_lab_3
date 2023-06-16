@@ -1,5 +1,4 @@
 package game
-
 import kotlin.random.Random
 
 enum class Color(val other: String, val hexCode: String) {
@@ -28,26 +27,27 @@ enum class Sides(val value: Int) {
  */
 class Die {
     //Setting up all the values to be null in start
-    var color: Color? = null
-    var numberOfSides: Sides? = null
+    private var color: Color? = null
+    private var numberOfSides: Sides? = null
     var sideUp: Int? = null
 
     constructor() {
         color = Color.values().find { it.other == "d6" }
         numberOfSides = Sides.SIX
-        roll()
+        sideUp = roll()
     }
 
     constructor(numberOfSides: Int) {
         val validNumberOfSides = Sides.values().find { it.value == numberOfSides }
-       val colorName = validNumberOfSides?.let { "d${it.value}" }
+        val colorName = validNumberOfSides?.let { "d${it.value}" }
 
         if(validNumberOfSides != null) {
             this.numberOfSides = validNumberOfSides
             color = Color.values().find { it.other == colorName }
-            roll()
+            sideUp = roll()
         } else {
             println("We have dices with only dices with 3,4,6,20 sides only")
+            return
         }
     }
 
@@ -57,17 +57,29 @@ class Die {
         if(validColor != null && validNumberOfSides != null) {
             numberOfSides = validNumberOfSides
             color = validColor
-            roll()
+            sideUp = roll()
         } else {
             println("Please enter valid values, values allowed for Colors are")
             val allColors = Color.values()
             for (color in allColors) {
                 println("Color: ${color.name}, Other: ${color.other}, Hex Code: ${color.hexCode}")
+                return
             }
         }
     }
-    fun roll() {
-        println("Rolling the dice")
-        sideUp = Random.nextInt(1, numberOfSides?.value?.plus(1)?: 1)
+    //Getter for color private parameter
+     fun getColor(): String? {
+        return color?.name
     }
+
+    //Getter for numberOfSides private parameter
+    fun getNumberOfSides(): Int? {
+        return numberOfSides?.value
+    }
+
+    fun roll(): Int {
+        println("Rolling the dice")
+        return Random.nextInt(1, numberOfSides?.value?.plus(1)?: 1)
+    }
+
 }
